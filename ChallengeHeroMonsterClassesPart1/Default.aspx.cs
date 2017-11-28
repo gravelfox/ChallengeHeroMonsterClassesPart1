@@ -11,6 +11,8 @@ namespace ChallengeHeroMonsterClassesPart1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string action = "";
+
             Character hero = new Character();
             hero.Name = "Eleven";
             hero.Health = 100;
@@ -24,19 +26,22 @@ namespace ChallengeHeroMonsterClassesPart1
             monster.DamageMax = 35;
             monster.AttackBonus = 0;
             monster.LabelName = "demogorgonLabel";
-            string action = "";
+
             monster.Defend(hero.Attack(), out action);
             writeAction(action);
             hero.Defend(monster.Attack(), out action);
             writeAction(action);
-            updateStats(hero);
-            updateStats(monster);
+
+            updateStats(hero, monster);
         }
 
-        private void updateStats(Character character)
+        private void updateStats(Character character1, Character character2)
         {
-            Label label = FindControl(character.LabelName) as Label;
-            label.Text = character.Name + "<br />HP: " + character.Health; 
+            Label label1 = FindControl(character1.LabelName) as Label;
+            label1.Text = character1.Name + "<br />HP: " + character1.Health;
+
+            Label label2 = FindControl(character2.LabelName) as Label;
+            label2.Text = character2.Name + "<br />HP: " + character2.Health;
         }
 
         private void writeAction(string action)
